@@ -36,7 +36,7 @@ def get_decimated_surfaces(src):
     return surfaces
 
 
-def to_gii_simple(fif, stc, basename, scale=1e3):
+def to_gii_simple(fif, stc, basename, scale=1e3, scale_rr=1e3):
     """Convert a FIF and STC file into GIFTI format
 
     Parameters
@@ -66,8 +66,8 @@ def to_gii_simple(fif, stc, basename, scale=1e3):
     ss = fif_ob
     stc = stc_ob
     # Coerce rr to be in mm (MNE uses meters)
-    ss[0]['rr'] *= 1e3
-    ss[1]['rr'] *= 1e3
+    ss[0]['rr'] *= scale_rr
+    ss[1]['rr'] *= scale_rr
     # Make the coordinate DataArrays and append them
     lh.append(nib.gifti.gifti.GiftiDataArray(data=ss[0]['rr'], intent='NIFTI_INTENT_POINTSET', datatype='NIFTI_TYPE_FLOAT32'))
     rh.append(nib.gifti.gifti.GiftiDataArray(data=ss[1]['rr'], intent='NIFTI_INTENT_POINTSET', datatype='NIFTI_TYPE_FLOAT32'))
