@@ -36,7 +36,7 @@ def get_decimated_surfaces(src):
     return surfaces
 
 
-def to_gii_simple(fif, stc, basename):
+def to_gii_simple(fif, stc, basename, scale=1e3):
     """Convert a FIF and STC file into GIFTI format
 
     Parameters
@@ -47,6 +47,8 @@ def to_gii_simple(fif, stc, basename):
         The source reconstruction STC file(s)
     basename: str
         The basename to use for the giftis
+    scale: float
+        The amount to scale the STC data by, default 1e3
 
     Notes
     -----
@@ -80,19 +82,17 @@ def to_gii_simple(fif, stc, basename):
     # Make the Time Series data arrays
     lh_ts = []
     rh_ts = []
-    # Factor to scale up data
-    scale_to_nano_amps = 1e9
     for t in range(stc[0].shape[1]):
         lh_ts.append(
             nib.gifti.gifti.GiftiDataArray(
-                data=stc[0].lh_data[:, t] * scale_to_nano_amps,
+                data=stc[0].lh_data[:, t] * scale,
                 intent='NIFTI_INTENT_POINTSET',
                 datatype='NIFTI_TYPE_FLOAT32'
             )
         )
         rh_ts.append(
             nib.gifti.gifti.GiftiDataArray(
-                data=stc[1].rh_data[:, t] * scale_to_nano_amps,
+                data=stc[1].rh_data[:, t] * scale,
                 intent='NIFTI_INTENT_POINTSET',
                 datatype='NIFTI_TYPE_FLOAT32'
             )
