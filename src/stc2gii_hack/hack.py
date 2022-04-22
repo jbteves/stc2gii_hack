@@ -63,6 +63,9 @@ def to_gii_simple(fif, stc, basename):
     rh = []
     ss = fif_ob
     stc = stc_ob
+    # Coerce rr to be in mm (MNE uses meters)
+    ss[0]['rr'] *= 1e3
+    ss[1]['rr'] *= 1e3
     # Make the coordinate DataArrays and append them
     lh.append(nib.gifti.gifti.GiftiDataArray(data=ss[0]['rr'], intent='NIFTI_INTENT_POINTSET', datatype='NIFTI_TYPE_FLOAT32'))
     rh.append(nib.gifti.gifti.GiftiDataArray(data=ss[1]['rr'], intent='NIFTI_INTENT_POINTSET', datatype='NIFTI_TYPE_FLOAT32'))
@@ -77,9 +80,23 @@ def to_gii_simple(fif, stc, basename):
     # Make the Time Series data arrays
     lh_ts = []
     rh_ts = []
+    # Factor to scale up data
+    scale_to_nano_amps = 1e9
     for t in range(stc[0].shape[1]):
-        lh_ts.append(nib.gifti.gifti.GiftiDataArray(data=stc[0].lh_data[:, t], intent='NIFTI_INTENT_POINTSET', datatype='NIFTI_TYPE_FLOAT32'))
-        rh_ts.append(nib.gifti.gifti.GiftiDataArray(data=stc[1].rh_data[:, t], intent='NIFTI_INTENT_POINTSET', datatype='NIFTI_TYPE_FLOAT32'))
+        lh_ts.append(
+            nib.gifti.gifti.GiftiDataArray(
+                data=stc[0].lh_data[:, t] * scale_to_nano_amps,
+                intent='NIFTI_INTENT_POINTSET',
+                datatype='NIFTI_TYPE_FLOAT32'
+            )
+        )
+        rh_ts.append(
+            nib.gifti.gifti.GiftiDataArray(
+                data=stc[1].rh_data[:, t] * scale_to_nano_amps,
+                intent='NIFTI_INTENT_POINTSET',
+                datatype='NIFTI_TYPE_FLOAT32'
+            )
+        )
     # Save the time series
     ts_gi_lh = nib.gifti.gifti.GiftiImage(darrays=lh_ts)
     ts_gi_rh = nib.gifti.gifti.GiftiImage(darrays=rh_ts)

@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "stc2gii_hack"
-version = "0.1.0"
+version = "0.3.0"
 description = ""
 authors = ["Joshua Teves <joshua.teves@nih.gov>"]
 
 [tool.poetry.dependencies]
 python = "^3.8, <= 3.10"
-mne = "^0.24.1"
+mne = "1.0.2"
 nibabel = "^3.2.2"
 numpy = "^1.22.3"
 
