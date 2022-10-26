@@ -171,7 +171,7 @@ setuptools_scm = ">=7"
 
 [[package]]
 name = "mne"
-version = "1.0.2"
+version = "1.2.1"
 description = "MNE-Python project for MEG and EEG data analysis."
 category = "main"
 optional = false
@@ -188,7 +188,7 @@ scipy = ">=1.1.0"
 tqdm = "*"
 
 [package.extras]
-test = ["imageio-ffmpeg", "edflib-python", "eeglabio", "sphinx-gallery", "nbclient", "nitime", "pooch", "wheel", "twine", "check-manifest", "pydocstyle", "codespell", "numpydoc", "flake8-array-spacing", "flake8", "pytest-harvest", "pytest-timeout", "pytest-cov", "pytest (!=4.6.0)"]
+test = ["imageio-ffmpeg", "pybv", "edflib-python", "eeglabio", "sphinx-gallery", "nbclient", "nitime", "wheel", "twine", "check-manifest", "pydocstyle", "codespell", "numpydoc", "flake8-array-spacing", "flake8", "pytest-harvest", "pytest-timeout", "pytest-cov", "pytest"]
 hdf5 = ["pymatreader", "h5io"]
 
 [[package]]
@@ -449,8 +449,8 @@ python-versions = "*"
 
 [metadata]
 lock-version = "1.1"
-python-versions = "^3.8, <= 3.10"
-content-hash = "ab6172871d7a40f205e0246c9b59340fe865688e083cea929d3ef8710b3aee8c"
+python-versions = "^3.8"
+content-hash = "039254554e7c7701a4ffeb9dd896749b3aca360a074cb19b997be4bfa121e460"
 
 [metadata.files]
 appdirs = [
