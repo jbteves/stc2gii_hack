@@ -36,7 +36,7 @@ def get_decimated_surfaces(src):
     return surfaces
 
 
-def to_gii_simple(fif, stc, basename, scale=1e3, scale_rr=1e3):
+def to_gii_simple(fif, stc, basename, scale=1, scale_rr=1e3):
     """Convert a FIF and STC file into GIFTI format
 
     Parameters
@@ -48,7 +48,9 @@ def to_gii_simple(fif, stc, basename, scale=1e3, scale_rr=1e3):
     basename: str
         The basename to use for the giftis
     scale: float
-        The amount to scale the STC data by, default 1e3
+        The amount to scale the STC data by, default 1
+    scale_rr: float
+        The amount to scale the mesh topography by, default 1e3
 
     Notes
     -----

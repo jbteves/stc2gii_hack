@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "stc2gii_hack"
-version = "0.3.2"
+version = "0.3.4"
 description = ""
 authors = ["Joshua Teves <joshua.teves@nih.gov>"]
 
@@ -12,6 +12,9 @@ numpy = "^1.22.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
+
+[tool.poetry.scripts]
+stc2gii_hack = "stc2gii_hack.run_hack:main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
